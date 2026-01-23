@@ -65,6 +65,7 @@ Variables que debo crear yo:
 - `new_datasets/...`: Carpeta con los datasets unificados y tratados por mí
 
 - `prepare_data.ipynb`: Notebook en el que he correlacionado los datos y los he tratado para poder ser tratados por el modelo (mismo tipo de fecha, buena estructura, etc.)
+- `addCustomParams`: Notebook en el que añado las variables creadas por mí al dataset.
 
 - `predict.ipynb`: Notebook encargado de crear el modelo XGBoost (entrenarlo).
 
