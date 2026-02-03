@@ -12,13 +12,9 @@ Desarrollar un sistema de modelado predictivo basado en XGBoost para la estimaci
     
     https://open-meteo.com/
     
-- Para datos de contaminantes:
-    - OpenMeteo tiene datos, pero no muchos
-    - IQAir, es de pago para datos pasados
-    - Catálogo de datos de la comunidad de Madrid (solo provincias lejanas al centro)
-    - Catálogo de datos del ayuntamiento de Madrid (este es el bueno)
+- Para datos de contaminantes, Catálogo de datos del ayuntamiento de Madrid es bueno
         
-        https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=aecb88a7e2b73410VgnVCM2000000c205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default
+    https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=aecb88a7e2b73410VgnVCM2000000c205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default
 
 
 ## 📂 Estructura
