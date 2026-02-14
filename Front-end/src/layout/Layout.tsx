@@ -1,10 +1,76 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
+import type { FormEvent } from "react";
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import axios from "axios"
 
 function Layout() {
     const location = useLocation();
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+    const [userEmail, setUserEmail] = useState("");
+
+    const [message, setMessage] = useState("");
+    const [isError, setIsError] = useState(false);
+
+    const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
+    const options = ["Gramíneas", "Olivo", "Ciprés", "Parietaria", "Artemisa"];
+    const toggleAllergy = (option: string) => {
+        setSelectedAllergies((prev) =>
+            prev.includes(option)
+                ? prev.filter((item) => item !== option)
+                : [...prev, option]
+        );
+    };
+
+    const handleSubmitRegister = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get("email");
+        const password = formData.get("password");
+        const allergies = selectedAllergies.toString();
+        axios.post("http://127.0.0.1:8000/users/register", {
+            email,
+            password,
+            allergies
+        })
+        .then((response) => {
+            setMessage("¡Registro completado con éxito!");
+            setUserEmail(email as string);
+            setIsError(false);
+        })
+        .catch((error) => {
+            setIsError(true);
+            if (error.response && error.response.status === 400) {
+                setMessage(error.response.data.detail || "Error en el registro.");
+            } else {
+                setMessage("Hubo un problema con el servidor.");
+            }
+        });
+    };
+
+    const handleSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get("email");
+        const password = formData.get("password");
+        axios.post("http://127.0.0.1:8000/users/login", {
+            email,
+            password
+        })
+        .then((response) => {
+            setMessage("¡Login exitoso!");
+            setUserEmail(email as string);
+            setIsError(false);
+        })
+        .catch((error) => {
+            setIsError(true);
+            if (error.response && error.response.status === 400) {
+                setMessage(error.response.data.detail || "Error en el registro.");
+            } else {
+                setMessage("Hubo un problema con el servidor.");
+            }
+        });
+    };
 
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
@@ -27,31 +93,63 @@ function Layout() {
                 </nav>
 
                 <div className="flex items-center space-x-3">
+                    <p className="text-sm font-medium text-gray-600">{userEmail}</p>
                     <button onClick={() => setIsLoginOpen(true)} className="text-sm font-semibold text-gray-600 hover:text-blue-600 px-3 py-2">Login</button>
                     <button onClick={() => setIsRegisterOpen(true)} className="text-sm font-bold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">Register</button>
                 </div>
                 </div>
             </header>
             <main>
-                <Outlet />
+                <Outlet context={userEmail} />
             </main>
 
             {/* MODALS */}
-            {isLoginOpen && <Modal title="Welcome Back" onClose={() => setIsLoginOpen(false)}>
-                <form className="space-y-4">
-                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
-                <input type="password" placeholder="Password" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+            {isLoginOpen && <Modal title="Welcome Back" onClose={() => { setIsLoginOpen(false); setMessage(""); }}>
+                <form onSubmit={handleSubmitLogin}  className="space-y-4">
+                <input type="email" name='email' placeholder="Email Address" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+                <input type="password" name='password' placeholder="Password" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
                 <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition">Sign In</button>
                 </form>
+                {message && (
+                    <p style={{ color: isError ? 'red' : 'green', marginTop: '10px' }}>
+                        {message}
+                    </p>
+                )}
             </Modal>}
 
-            {isRegisterOpen && <Modal title="Create Account" onClose={() => setIsRegisterOpen(false)}>
-                <form className="space-y-4">
-                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
-                <input type="password" placeholder="Create Password" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
-                <input type="allergie" placeholder="Your polen allergie" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+            {isRegisterOpen && <Modal title="Create Account" onClose={() => { setIsRegisterOpen(false); setMessage(""); }}>
+                <form onSubmit={handleSubmitRegister} className="space-y-4">
+                <input type="email" name='email' placeholder="Email Address" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+                <input type="password" name='password' placeholder="Create Password" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" />
+                <p className="text-sm font-bold text-gray-600">Your allergies:</p>
+                <div className="flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-200 rounded-xl">
+                    {options.map((option) => (
+                        <button
+                            key={option}
+                            type="button"
+                            onClick={() => toggleAllergy(option)}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                selectedAllergies.includes(option)
+                                    ? "bg-blue-600 text-white shadow-md shadow-blue-200 scale-105"
+                                    : "bg-white text-gray-600 border border-gray-200 hover:border-blue-300 hover:bg-blue-50"
+                            }`}
+                        >
+                            {option}
+                        </button>
+                    ))}
+                </div>
+                {selectedAllergies.length > 0 && (
+                    <p className="text-xs text-gray-400 italic">
+                        Seleccionadas: {selectedAllergies.join(", ")}
+                    </p>
+                )}
                 <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition">Get Started</button>
                 </form>
+                {message && (
+                    <p style={{ color: isError ? 'red' : 'green', marginTop: '10px' }}>
+                        {message}
+                    </p>
+                )}
             </Modal>}
         </div>
     )

@@ -1,0 +1,50 @@
+{
+    "Gramineas": {
+      "historical": [12, 15, 22, 19, 25, 30, 28],
+      "prediction": {
+        "today": 35,
+        "tomorrow": 42,
+        "day_after_tomorrow": 38
+      }
+    },
+    "Olivo": {
+      "historical": [5, 8, 12, 18, 25, 40, 55],
+      "prediction": {
+        "today": 70,
+        "tomorrow": 85,
+        "day_after_tomorrow": 110
+      }
+    },
+    "Cupresacea": {
+      "historical": [140, 135, 120, 110, 95, 80, 75],
+      "prediction": {
+        "today": 60,
+        "tomorrow": 55,
+        "day_after_tomorrow": 40
+      }
+    },
+    "Platano_de_paseo": {
+      "historical": [10, 25, 45, 90, 160, 210, 195],
+      "prediction": {
+        "today": 230,
+        "tomorrow": 250,
+        "day_after_tomorrow": 215
+      }
+    },
+    "Quenopodiaceas": {
+      "historical": [2, 4, 3, 5, 7, 6, 8],
+      "prediction": {
+        "today": 12,
+        "tomorrow": 15,
+        "day_after_tomorrow": 14
+      }
+    },
+    "Urticaceas": {
+      "historical": [8, 10, 12, 11, 14, 15, 18],
+      "prediction": {
+        "today": 22,
+        "tomorrow": 25,
+        "day_after_tomorrow": 28
+      }
+    }
+}
