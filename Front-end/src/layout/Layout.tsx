@@ -13,7 +13,7 @@ function Layout() {
     const [isError, setIsError] = useState(false);
 
     const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
-    const options = ["Gramíneas", "Olivo", "Ciprés", "Parietaria", "Artemisa"];
+    const options = ["Gramineas", "Olivo", "Cupresacea", "Platano de paseo", "Quenopodiaceas", "Urticaceas"];
     const toggleAllergy = (option: string) => {
         setSelectedAllergies((prev) =>
             prev.includes(option)
