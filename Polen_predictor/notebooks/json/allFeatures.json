@@ -45,6 +45,11 @@
     "CO (mg/m3)_lag_3",
     "CO (mg/m3)_lag_7",
     "CO (mg/m3)_lag_14",
+    "SO2 (ug/m3)_lag_1",
+    "SO2 (ug/m3)_lag_2",
+    "SO2 (ug/m3)_lag_3",
+    "SO2 (ug/m3)_lag_7",
+    "SO2 (ug/m3)_lag_14",
     "Benceno (ug/m3)_lag_1",
     "Benceno (ug/m3)_lag_2",
     "Benceno (ug/m3)_lag_3",
@@ -147,5 +152,10 @@
     "polen_rolling_mean_7d_lag_7",
     "polen_lag_14",
     "polen_rolling_mean_3d_lag_14",
-    "polen_rolling_mean_7d_lag_14"
+    "polen_rolling_mean_7d_lag_14",
+    "temp_diff_3d",
+    "humidity_drop_2d",
+    "viento_x_temperatura",
+    "defici_pression_vap_mean_3d",
+    "days_from_start"
 ]

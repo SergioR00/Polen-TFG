@@ -1,50 +1,98 @@
 {
     "Gramineas": {
-      "historical": [12, 15, 22, 19, 25, 30, 28],
-      "prediction": {
-        "today": 35,
-        "tomorrow": 42,
-        "day_after_tomorrow": 38
-      }
+        "historical": [
+            5.2,
+            6.2,
+            4.7,
+            2.2,
+            3.6,
+            14.3,
+            5.3
+        ],
+        "prediction": {
+            "today": 7.2,
+            "tomorrow": 9.0,
+            "day_after_tomorrow": 6.9
+        }
     },
     "Olivo": {
-      "historical": [5, 8, 12, 18, 25, 40, 55],
-      "prediction": {
-        "today": 70,
-        "tomorrow": 85,
-        "day_after_tomorrow": 110
-      }
+        "historical": [
+            0.1,
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            2.6,
+            2.1
+        ],
+        "prediction": {
+            "today": 2.5,
+            "tomorrow": 0.8,
+            "day_after_tomorrow": 1.5
+        }
     },
     "Cupresacea": {
-      "historical": [140, 135, 120, 110, 95, 80, 75],
-      "prediction": {
-        "today": 60,
-        "tomorrow": 55,
-        "day_after_tomorrow": 40
-      }
+        "historical": [
+            9.9,
+            15.1,
+            5.8,
+            3.1,
+            2.4,
+            18.8,
+            11.2
+        ],
+        "prediction": {
+            "today": 8.6,
+            "tomorrow": 6.9,
+            "day_after_tomorrow": 5.0
+        }
     },
     "Platano_de_paseo": {
-      "historical": [10, 25, 45, 90, 160, 210, 195],
-      "prediction": {
-        "today": 230,
-        "tomorrow": 250,
-        "day_after_tomorrow": 215
-      }
+        "historical": [
+            0.8,
+            0.1,
+            0.1,
+            0.1,
+            0.0,
+            28.5,
+            1.9
+        ],
+        "prediction": {
+            "today": 0.7,
+            "tomorrow": 2.1,
+            "day_after_tomorrow": 7.9
+        }
     },
     "Quenopodiaceas": {
-      "historical": [2, 4, 3, 5, 7, 6, 8],
-      "prediction": {
-        "today": 12,
-        "tomorrow": 15,
-        "day_after_tomorrow": 14
-      }
+        "historical": [
+            0.0,
+            0.9,
+            0.0,
+            0.0,
+            0.0,
+            2.9,
+            0.5
+        ],
+        "prediction": {
+            "today": 0.3,
+            "tomorrow": 0.3,
+            "day_after_tomorrow": 0.6
+        }
     },
     "Urticaceas": {
-      "historical": [8, 10, 12, 11, 14, 15, 18],
-      "prediction": {
-        "today": 22,
-        "tomorrow": 25,
-        "day_after_tomorrow": 28
-      }
+        "historical": [
+            14.8,
+            11.4,
+            9.6,
+            4.5,
+            2.8,
+            3.9,
+            3.1
+        ],
+        "prediction": {
+            "today": 4.1,
+            "tomorrow": 4.1,
+            "day_after_tomorrow": 4.7
+        }
     }
 }
