@@ -1,98 +1,278 @@
 {
     "Gramineas": {
         "historical": [
-            5.2,
-            6.2,
-            4.7,
-            2.2,
-            3.6,
-            14.3,
-            5.3
+            {
+                "value": 4.0,
+                "isPrediction": false
+            },
+            {
+                "value": 6.0,
+                "isPrediction": false
+            },
+            {
+                "value": 8.9,
+                "isPrediction": true
+            },
+            {
+                "value": 6.4,
+                "isPrediction": true
+            },
+            {
+                "value": 4.3,
+                "isPrediction": true
+            },
+            {
+                "value": 6.8,
+                "isPrediction": true
+            },
+            {
+                "value": 5.8,
+                "isPrediction": true
+            }
         ],
         "prediction": {
-            "today": 7.2,
-            "tomorrow": 9.0,
-            "day_after_tomorrow": 6.9
-        }
-    },
-    "Olivo": {
-        "historical": [
-            0.1,
-            0.1,
-            0.0,
-            0.0,
-            0.0,
-            2.6,
-            2.1
-        ],
-        "prediction": {
-            "today": 2.5,
-            "tomorrow": 0.8,
-            "day_after_tomorrow": 1.5
+            "today": {
+                "value": 7.0,
+                "isPrediction": true
+            },
+            "tomorrow": {
+                "value": 15.4,
+                "isPrediction": true
+            },
+            "day_after_tomorrow": {
+                "value": 6.6,
+                "isPrediction": true
+            }
         }
     },
     "Cupresacea": {
         "historical": [
-            9.9,
-            15.1,
-            5.8,
-            3.1,
-            2.4,
-            18.8,
-            11.2
+            {
+                "value": 10.0,
+                "isPrediction": false
+            },
+            {
+                "value": 24.0,
+                "isPrediction": false
+            },
+            {
+                "value": 10.8,
+                "isPrediction": true
+            },
+            {
+                "value": 6.2,
+                "isPrediction": true
+            },
+            {
+                "value": 4.6,
+                "isPrediction": true
+            },
+            {
+                "value": 3.7,
+                "isPrediction": true
+            },
+            {
+                "value": 4.4,
+                "isPrediction": true
+            }
         ],
         "prediction": {
-            "today": 8.6,
-            "tomorrow": 6.9,
-            "day_after_tomorrow": 5.0
+            "today": {
+                "value": 3.5,
+                "isPrediction": true
+            },
+            "tomorrow": {
+                "value": 5.4,
+                "isPrediction": true
+            },
+            "day_after_tomorrow": {
+                "value": 3.7,
+                "isPrediction": true
+            }
+        }
+    },
+    "Olivo": {
+        "historical": [
+            {
+                "value": 0.0,
+                "isPrediction": false
+            },
+            {
+                "value": 0.0,
+                "isPrediction": false
+            },
+            {
+                "value": 4.0,
+                "isPrediction": true
+            },
+            {
+                "value": 2.8,
+                "isPrediction": true
+            },
+            {
+                "value": 1.9,
+                "isPrediction": true
+            },
+            {
+                "value": 0.9,
+                "isPrediction": true
+            },
+            {
+                "value": 1.2,
+                "isPrediction": true
+            }
+        ],
+        "prediction": {
+            "today": {
+                "value": 1.5,
+                "isPrediction": true
+            },
+            "tomorrow": {
+                "value": 3.3,
+                "isPrediction": true
+            },
+            "day_after_tomorrow": {
+                "value": 1.9,
+                "isPrediction": true
+            }
         }
     },
     "Platano_de_paseo": {
         "historical": [
-            0.8,
-            0.1,
-            0.1,
-            0.1,
-            0.0,
-            28.5,
-            1.9
+            {
+                "value": 0.0,
+                "isPrediction": false
+            },
+            {
+                "value": 0.0,
+                "isPrediction": false
+            },
+            {
+                "value": 27.5,
+                "isPrediction": true
+            },
+            {
+                "value": 1.0,
+                "isPrediction": true
+            },
+            {
+                "value": 1.6,
+                "isPrediction": true
+            },
+            {
+                "value": 2.2,
+                "isPrediction": true
+            },
+            {
+                "value": 1.4,
+                "isPrediction": true
+            }
         ],
         "prediction": {
-            "today": 0.7,
-            "tomorrow": 2.1,
-            "day_after_tomorrow": 7.9
-        }
-    },
-    "Quenopodiaceas": {
-        "historical": [
-            0.0,
-            0.9,
-            0.0,
-            0.0,
-            0.0,
-            2.9,
-            0.5
-        ],
-        "prediction": {
-            "today": 0.3,
-            "tomorrow": 0.3,
-            "day_after_tomorrow": 0.6
+            "today": {
+                "value": 0.5,
+                "isPrediction": true
+            },
+            "tomorrow": {
+                "value": 9.2,
+                "isPrediction": true
+            },
+            "day_after_tomorrow": {
+                "value": 11.2,
+                "isPrediction": true
+            }
         }
     },
     "Urticaceas": {
         "historical": [
-            14.8,
-            11.4,
-            9.6,
-            4.5,
-            2.8,
-            3.9,
-            3.1
+            {
+                "value": 15.0,
+                "isPrediction": false
+            },
+            {
+                "value": 26.0,
+                "isPrediction": false
+            },
+            {
+                "value": 0.9,
+                "isPrediction": true
+            },
+            {
+                "value": 1.9,
+                "isPrediction": true
+            },
+            {
+                "value": 4.3,
+                "isPrediction": true
+            },
+            {
+                "value": 4.3,
+                "isPrediction": true
+            },
+            {
+                "value": 4.9,
+                "isPrediction": true
+            }
         ],
         "prediction": {
-            "today": 4.1,
-            "tomorrow": 4.1,
-            "day_after_tomorrow": 4.7
+            "today": {
+                "value": 5.1,
+                "isPrediction": true
+            },
+            "tomorrow": {
+                "value": 5.6,
+                "isPrediction": true
+            },
+            "day_after_tomorrow": {
+                "value": 3.9,
+                "isPrediction": true
+            }
+        }
+    },
+    "Quenopodiaceas": {
+        "historical": [
+            {
+                "value": 1.0,
+                "isPrediction": false
+            },
+            {
+                "value": 0.0,
+                "isPrediction": false
+            },
+            {
+                "value": 3.0,
+                "isPrediction": true
+            },
+            {
+                "value": 0.9,
+                "isPrediction": true
+            },
+            {
+                "value": 0.4,
+                "isPrediction": true
+            },
+            {
+                "value": 0.4,
+                "isPrediction": true
+            },
+            {
+                "value": 0.4,
+                "isPrediction": true
+            }
+        ],
+        "prediction": {
+            "today": {
+                "value": 0.3,
+                "isPrediction": true
+            },
+            "tomorrow": {
+                "value": 0.5,
+                "isPrediction": true
+            },
+            "day_after_tomorrow": {
+                "value": 0.8,
+                "isPrediction": true
+            }
         }
     }
 }

@@ -2,18 +2,37 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 interface PolenInfo {
-    historical: number[];
+    historical: [
+        {
+            value: number;
+            isPrediction: boolean;
+        }
+    ];
     prediction: {
-        today: number;
-        tomorrow: number;
-        day_after_tomorrow: number;
+        today: {
+            value: number;
+            isPrediction: boolean;
+        };
+        tomorrow: {
+            value: number;
+            isPrediction: boolean;
+        };
+        day_after_tomorrow: {
+            value: number;
+            isPrediction: boolean;
+        };
     };
 }
 
 function App() {
-    const medPolen = 150;
-    const lowPolen = 50;
-	const options = ["Gramineas", "Olivo", "Cupresacea", "Platano_de_paseo", "Quenopodiaceas", "Urticaceas"];
+    const POLEN_CONFIG: Record<string, { max: number; low: number; med: number }> = {
+        Gramineas: { max: 400, low: 10, med: 50 },
+        Olivo: { max: 500, low: 50, med: 150 },
+        Cupresacea: { max: 500, low: 50, med: 200 },
+        Platano_de_paseo: { max: 300, low: 50, med: 150 },
+        Quenopodiaceas: { max: 30, low: 5, med: 10 },
+        Urticaceas: { max: 100, low: 10, med: 40 },
+    };
     const [polenData, setPolenData] = useState<Record<string, PolenInfo>>({});
     
 	const [selectedPolen, setSelectedPolen] = useState<string[]>(() => {
@@ -42,9 +61,10 @@ function App() {
         );
     };
 
-    const getRisk = (value: number) => {
-        if (value < lowPolen) return { label: "Low", color: "green" };
-        if (value <= medPolen) return { label: "Moderate", color: "orange" };
+    const getRisk = (value: number, polenType: string) => {
+        const { low, med } = POLEN_CONFIG[polenType];
+        if (value < low) return { label: "Low", color: "green" };
+        if (value <= med) return { label: "Moderate", color: "orange" };
         return { label: "High", color: "red" };
     };
 
@@ -60,13 +80,13 @@ function App() {
                 {selectedPolen.map(name => {
                     const info = polenData[name];
                     if (!info) return null;
-                    const value = info.prediction[dayKey];
+                    const value = info.prediction[dayKey].value;
                     return (
                         <ForecastRow 
                             key={`${dayKey}-${name}`} 
                             name={name.replace(/_/g, ' ')} 
                             val={value} 
-                            risk={getRisk(value)} 
+                            risk={getRisk(value, name)} 
                         />
                     );
                 })}
@@ -79,14 +99,14 @@ function App() {
             <main className="container mx-auto">
                 {/* SELECTOR DE CHIPS */}
                 <div className="flex flex-wrap gap-2 mb-8">
-                    {options.map(opt => (
-                        <button key={opt} onClick={() => togglePolen(opt)}
+                    {Object.keys(POLEN_CONFIG).map(name => (
+                        <button key={name} onClick={() => togglePolen(name)}
                             className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
-                                selectedPolen.includes(opt) 
+                                selectedPolen.includes(name) 
                                 ? "bg-blue-600 text-white shadow-md scale-105" 
                                 : "bg-white text-gray-400 border border-gray-200 hover:border-blue-300"
                             }`}>
-                            {opt.replace(/_/g, ' ')}
+                            {name.replace(/_/g, ' ')}
                         </button>
                     ))}
                 </div>
@@ -117,22 +137,34 @@ function App() {
                             <div className="space-y-8">
                                 {selectedPolen.map(name => {
                                     const info = polenData[name];
-                                    if (!info) return null;
+                                    const config = POLEN_CONFIG[name];
+                                    if (!info || !config) return null;
+
                                     return (
                                         <div key={name} className="animate-in fade-in duration-500">
                                             <div className="flex justify-between items-center mb-2">
                                                 <p className="text-xs font-bold text-gray-500 uppercase">{name.replace(/_/g, ' ')}</p>
-                                                <span className="text-[10px] text-gray-400 font-medium">Últimos valores</span>
+                                                <span className="text-[10px] text-gray-400 font-medium">Límite: {config.max} gr/m³</span>
                                             </div>
                                             <div className="flex items-end h-20 gap-1.5">
-                                                {info.historical.map((v, i) => (
-                                                    <div key={i} className="flex-1 bg-blue-50 rounded-t-md hover:bg-blue-500 transition-all group relative border-b border-blue-100" 
-                                                         style={{ height: `${Math.min((v / 300) * 100, 100)}%` }}>
-                                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                                                            {v}
+                                                {info.historical.map((v, i) => {
+                                                    const heightPercentage = Math.min((v.value / config.max) * 100, 100);
+
+                                                    return (
+                                                        <div key={i} 
+                                                            className={`flex-1 rounded-t-md transition-all group relative border-b
+                                                                ${v.isPrediction 
+                                                                    ? "bg-blue-200/50 border-blue-300 border-dashed border-x border-t" 
+                                                                    : "bg-blue-500 border-blue-600"
+                                                                } hover:brightness-110`} 
+                                                            style={{ height: `${heightPercentage}%` }}>
+
+                                                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                                                                {v.isPrediction ? `Pred: ${v.value}` : `Real: ${v.value}`}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                ))}
+                                                    );
+                                                })}
                                             </div>
                                         </div>
                                     );
