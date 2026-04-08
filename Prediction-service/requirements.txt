@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+papermill
+apscheduler
+pandas
+seaborn
+matplotlib
+ipykernel
+pandas
+seaborn
+matplotlib
+openmeteo_requests
+requests_cache
+retry_requests
+datetime
+xgboost
+scikit-learn

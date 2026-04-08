@@ -26,12 +26,12 @@ interface PolenInfo {
 
 function App() {
     const POLEN_CONFIG: Record<string, { max: number; low: number; med: number }> = {
-        Gramineas: { max: 400, low: 10, med: 50 },
-        Olivo: { max: 500, low: 50, med: 150 },
-        Cupresacea: { max: 500, low: 50, med: 200 },
-        Platano_de_paseo: { max: 300, low: 50, med: 150 },
-        Quenopodiaceas: { max: 30, low: 5, med: 10 },
-        Urticaceas: { max: 100, low: 10, med: 40 },
+        Gramineas: { max: 100, low: 10, med: 50 },
+        Olivo: { max: 200, low: 50, med: 150 },
+        Cupresacea: { max: 250, low: 50, med: 200 },
+        Platano_de_paseo: { max: 200, low: 50, med: 150 },
+        Quenopodiaceas: { max: 20, low: 5, med: 10 },
+        Urticaceas: { max: 60, low: 10, med: 40 },
     };
     const [polenData, setPolenData] = useState<Record<string, PolenInfo>>({});
     
@@ -130,7 +130,7 @@ function App() {
                         )}
                     </div>
 
-                    {/* COLUMNA DERECHA: HISTÓRICO (SE MANTIENE IGUAL) */}
+                    {/* COLUMNA DERECHA: HISTÓRICO */}
                     <div className="lg:w-1/2">
                         <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm sticky top-6">
                             <h2 className="text-xl font-bold mb-6 text-gray-800">Tendencia (7 días)</h2>
@@ -139,6 +139,15 @@ function App() {
                                     const info = polenData[name];
                                     const config = POLEN_CONFIG[name];
                                     if (!info || !config) return null;
+
+                                    // Función interna para determinar el color de la barra según el nivel
+                                    const getBarColor = (val: number, isPred: boolean) => {
+                                        let colorClass = "";
+                                        if (val < config.low) colorClass = isPred ? "bg-green-200/50 border-green-300" : "bg-green-500 border-green-600";
+                                        else if (val <= config.med) colorClass = isPred ? "bg-orange-200/50 border-orange-300" : "bg-orange-500 border-orange-600";
+                                        else colorClass = isPred ? "bg-red-200/50 border-red-300" : "bg-red-500 border-red-600";
+                                        return colorClass;
+                                    };
 
                                     return (
                                         <div key={name} className="animate-in fade-in duration-500">
@@ -149,14 +158,11 @@ function App() {
                                             <div className="flex items-end h-20 gap-1.5">
                                                 {info.historical.map((v, i) => {
                                                     const heightPercentage = Math.min((v.value / config.max) * 100, 100);
+                                                    const barStyles = getBarColor(v.value, v.isPrediction);
 
                                                     return (
                                                         <div key={i} 
-                                                            className={`flex-1 rounded-t-md transition-all group relative border-b
-                                                                ${v.isPrediction 
-                                                                    ? "bg-blue-200/50 border-blue-300 border-dashed border-x border-t" 
-                                                                    : "bg-blue-500 border-blue-600"
-                                                                } hover:brightness-110`} 
+                                                            className={`flex-1 rounded-t-md transition-all group relative border-b border-x border-t ${v.isPrediction ? 'border-dashed' : ''} ${barStyles} hover:brightness-110`} 
                                                             style={{ height: `${heightPercentage}%` }}>
 
                                                             <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
