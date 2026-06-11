@@ -28,7 +28,7 @@ function Layout() {
         const email = formData.get("email");
         const password = formData.get("password");
         const allergies = selectedAllergies.toString();
-        axios.post("http://127.0.0.1:8000/users/register", {
+        axios.post("http://127.0.0.1:8090/users/register", {
             email,
             password,
             allergies
@@ -53,7 +53,7 @@ function Layout() {
         const formData = new FormData(e.currentTarget);
         const email = formData.get("email");
         const password = formData.get("password");
-        axios.post("http://127.0.0.1:8000/users/login", {
+        axios.post("http://127.0.0.1:8090/users/login", {
             email,
             password
         })

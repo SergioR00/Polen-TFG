@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-SQLALCHEMY_DATABASE_URL = "postgresql://root:1234@127.0.0.1:5433/user_service"
+SQLALCHEMY_DATABASE_URL = "postgresql://root:1234@127.0.0.1:5433/user_service?client_encoding=utf8"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,

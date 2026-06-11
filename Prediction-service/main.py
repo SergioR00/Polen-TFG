@@ -1,6 +1,10 @@
+import asyncio
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+
+import uvicorn
 from apscheduler.schedulers.background import BackgroundScheduler
 import papermill as pm
 import json
@@ -27,10 +31,11 @@ def ejecutar_script_notebooks():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    ejecutar_script_notebooks()
     scheduler = BackgroundScheduler()
-    scheduler.add_job(ejecutar_script_notebooks, 'interval', hours=1)
+    scheduler.add_job(ejecutar_script_notebooks, 'interval', hours=1, misfire_grace_time=None)
     scheduler.start()
+
+    asyncio.create_task(asyncio.to_thread(ejecutar_script_notebooks))
     
     yield
     scheduler.shutdown()
@@ -46,14 +51,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @app.get("/prediction")
 def get_prediccion():
-    with open("polen.json", "r") as f:
+    with open(os.path.join(BASE_DIR, "polen.json"), "r") as f:
         data = json.load(f)
     return data
 
 @app.get("/pollutants")
 def get_pollutants():
-    with open("pollutants.json", "r") as f:
+    with open(os.path.join(BASE_DIR, "pollutants.json"), "r") as f:
         data = json.load(f) 
     return data
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)

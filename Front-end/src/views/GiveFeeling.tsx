@@ -17,7 +17,7 @@ function GiveFeeling() {
 			setMessage("Error: Debes estar logueado.");
 			return;
 		}
-		axios.post("http://127.0.0.1:8000/feelings/create_feeling", {
+		axios.post("http://127.0.0.1:8090/feelings/create_feeling", {
 			email,
 			intensity,
 			feeling
