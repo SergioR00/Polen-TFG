@@ -26,7 +26,7 @@ function Pollutants() {
 
     const getPollutants = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8000/pollutants");
+            const response = await axios.get("http://127.0.0.1:8080/pollutants");
             const datos = response.data;
 			
             const updatedData = pollutants.map((pollutant) => {
